@@ -4,6 +4,10 @@ var server = restify.createServer();
 var tucao = require('./model/TuCao');
 var fs = require('fs')
 
+//七牛的配置
+qiniu.conf.ACCESS_KEY = '0kt3W6JnvYK3rzPHmlFnW4xRfknkAnIdaoE_gByO'
+qiniu.conf.SECRET_KEY = 'FCc9471b3g4cHl18KFGmRj8xK3QzKOQ-2tLHyYaA'
+
 function around (req,rep,next) {
 	//console.log(req)
 	console.log("req.body:%s",req.body)
@@ -62,7 +66,7 @@ io.sockets.on('close',function(){
 
 io.sockets.on('connection', function (socket) {
   console.log('IO Socket connected!')
-  socket.emit('news', { hello: 'world' });
+  //socket.emit('news', { hello: 'world' });
   socket.on('message', function (data) {
     console.log(data);
   });
