@@ -2,10 +2,10 @@
 
 <meta charset="utf-8" />  
 <title>WebSocket Test</title>  
-<!--
+
 <script src="/socket.io/socket.io.js"></script>
 <script>
-  var socket = io('ws://localhost:3900/');
+  var socket = io.connect('ws://localhost:3900/');
   socket.on('connect',function(){
   	console.log("socketio open!");
   });
@@ -13,11 +13,13 @@
   	console.log("socketio close!");
   });
 </script>
--->
 
 
+<!--
+终于放弃了WebSocket
+http://cnodejs.org/topic/53d5c442895ba3062be77f81	
 <script language="javascript" type="text/javascript"> 
-	alert("!");
+	//alert("!");
 	var websocket = new WebSocket("ws://localhost:3900/"); 
 	websocket.connected = false;
 	websocket.onopen = function(evt) { 
@@ -28,5 +30,5 @@
 		console.log("websocket close")
 	}; 
 </script>  
-
+-->
 </html>

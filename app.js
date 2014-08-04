@@ -83,14 +83,14 @@ io.sockets.on('connection', function (socket) {
   });   
 });
 
-var qiniu = require('qiniu.rs')
+var qiniu = require('qiniu')
 function uptoken() {
   //我们自己的七牛的配置(https://portal.qiniu.com/setting/key)
   qiniu.conf.ACCESS_KEY = '0kt3W6JnvYK3rzPHmlFnW4xRfknkAnIdaoE_gByO'
   qiniu.conf.SECRET_KEY = 'FCc9471b3g4cHl18KFGmRj8xK3QzKOQ-2tLHyYaA'
 
-  var policy = new qiniu.PutPolicy()
-  var token = policy.uptoken("yuanditucao")
+  var policy = new qiniu.rs.PutPolicy()
+  var token = policy.rs.uptoken("yuanditucao")
   console.log("QiNiu token:"+token);
 
   //TODO:
