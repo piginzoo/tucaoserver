@@ -4,9 +4,6 @@ var server = restify.createServer();
 var tucao = require('./model/TuCao');
 var fs = require('fs')
 
-//七牛的配置
-qiniu.conf.ACCESS_KEY = '0kt3W6JnvYK3rzPHmlFnW4xRfknkAnIdaoE_gByO'
-qiniu.conf.SECRET_KEY = 'FCc9471b3g4cHl18KFGmRj8xK3QzKOQ-2tLHyYaA'
 
 function around (req,rep,next) {
 	//console.log(req)
@@ -85,3 +82,17 @@ io.sockets.on('connection', function (socket) {
     console.log("close:");
   });   
 });
+
+var qiniu = require('qiniu.rs')
+function uptoken() {
+  //我们自己的七牛的配置(https://portal.qiniu.com/setting/key)
+  qiniu.conf.ACCESS_KEY = '0kt3W6JnvYK3rzPHmlFnW4xRfknkAnIdaoE_gByO'
+  qiniu.conf.SECRET_KEY = 'FCc9471b3g4cHl18KFGmRj8xK3QzKOQ-2tLHyYaA'
+
+  var policy = new qiniu.PutPolicy()
+  var token = policy.uptoken("yuanditucao")
+  console.log("QiNiu token:"+token);
+
+  //TODO:
+  
+}
