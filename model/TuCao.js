@@ -2,33 +2,18 @@ var mongoose = require("mongoose")
 mongoose.connect('mongodb://localhost/yuanditucao');
 
 var TuCaoSchema = new mongoose.Schema({
-	 longitude: Number, 
-	 latitude:  Number,
-	 tucao : {
-	 	content: String
-	 },
-	 meta : {
-	 	created:{
-	 		type:Date,
-	 		default: Date.now()
-	 	},
-	 	updated:{
-	 		type:Date,
-	 		default: Date.now()
-	 	}
-	 }
-},{ 
-	collection: 'tucao' 
+	longitude: Number, 
+	latitude:  Number,
+	content: String,
+	created:{
+ 		type:Date,
+ 		default: Date.now()
+	}
 })
 
 //更新时间
 TuCaoSchema.pre('save',function(argument) {
-	if(this.new){
-		this.meta.created = this.meta.updated = Date.now()
-	}else{
-		this.meta.updated = Date.now()
-	}
-
+	this.created = this.meta.updated = Date.now()
 })
 var TuCao = mongoose.model("TuCao", TuCaoSchema)
 var TuCaoDao = function(){}

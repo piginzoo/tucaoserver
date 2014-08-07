@@ -57,42 +57,25 @@ server.get('/', function(req, res, next) {
     });
 });
 
-io.sockets.on('close',function(){
-  console.log('close');
-});
-
+var qiniu = require('./qiniu.js')
 io.sockets.on('connection', function (socket) {
   console.log('IO Socket connected!')
-  //socket.emit('news', { hello: 'world' });
+  socket.emit('data', {
+            longitude: 116.30815, 
+            latitude:  40.056885,
+            content: '百度就是一个垃圾！'
+  });
   socket.on('message', function (data) {
-    console.log(data);
+    console.log('receive:'+data);
   });
 
- socket.on('request', function (data) {
-    console.log("request:"+data);
-  }); 
+  socket.on('qiniu.token',function(data){
+    console.log('qiniu toaken request')
+    //向客户端返回七牛的上传token
+    socket.emit('qiniu.token',qiniu.token());
+  })
 
-
- socket.on('connect', function (data) {
-    console.log("connect:"+data);
-  }); 
-
-
- socket.on('close', function () {
-    console.log("close:");
+  socket.on('close', function () {
+    console.log("close!");
   });   
 });
-
-var qiniu = require('qiniu')
-function uptoken() {
-  //我们自己的七牛的配置(https://portal.qiniu.com/setting/key)
-  qiniu.conf.ACCESS_KEY = '0kt3W6JnvYK3rzPHmlFnW4xRfknkAnIdaoE_gByO'
-  qiniu.conf.SECRET_KEY = 'FCc9471b3g4cHl18KFGmRj8xK3QzKOQ-2tLHyYaA'
-
-  var policy = new qiniu.rs.PutPolicy()
-  var token = policy.rs.uptoken("yuanditucao")
-  console.log("QiNiu token:"+token);
-
-  //TODO:
-  
-}

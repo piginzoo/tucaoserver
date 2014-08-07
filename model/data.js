@@ -1,9 +1,7 @@
 tucao = {
-	 longitude: 116.30815, 
-	 latitude:  40.056885,
-	 tucao : {
-	 	content: '百度就是一个垃圾！'
-	 }
+	longitude: 116.30815, 
+	latitude:  40.056885,
+	content: '百度就是一个垃圾！'
 }
 
 for (var i=0;i<10;i++){

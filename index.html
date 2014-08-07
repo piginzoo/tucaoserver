@@ -5,12 +5,23 @@
 
 <script src="/socket.io/socket.io.js"></script>
 <script>
-  var socket = io.connect('ws://localhost:3900/');
+  var socket = io.connect('ws://localhost:3900');
   socket.on('connect',function(){
   	console.log("socketio open!");
   });
   socket.on('close',function(){
   	console.log("socketio close!");
+  });
+  socket.on('data',function(data){
+  	console.log("data:"+JSON.stringify(data));
+  });
+
+  socket.on('Qi Niu',function(data){
+  	console.log("Qiniu Token:"+JSON.stringify(data));
+  });
+
+  socket.emit('qiniu.token',function(data){
+  	console.log('sent qiniu token request:'+data);
   });
 </script>
 
